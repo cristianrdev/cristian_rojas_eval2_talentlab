@@ -35,7 +35,7 @@ public class UsuarioController {
 	}
 	
 	@RequestMapping(value="/crear", method = RequestMethod.POST)
-	public String crearUsuario(@Valid @ModelAttribute("usuario") Usuario usuario, Model model) {
+	public String crearUsuario(@Valid @ModelAttribute("usuario") Usuario usuario, Model model, RedirectAttributes redirectAttrs) {
 		if(usuario.getNombre().isBlank() || usuario.getApellido().isBlank() || usuario.getEmail().isBlank()) {
 			model.addAttribute("error", "Todos los campos son requeridos!");
 			List<Usuario> lista_usuario = uservice.findAll();
@@ -44,7 +44,8 @@ public class UsuarioController {
 		}
 		System.out.println("crear "+ usuario.getNombre() + " " + usuario.getApellido() + " " + usuario.getEmail());
 		Usuario user = uservice.insertarUsuario(usuario);
-		return "redirect:/usuario";
+		redirectAttrs.addFlashAttribute("nuevo_usuario", user);
+		return "redirect:/venta";//envía a la ruta de ventas
 	}
 	
 	@RequestMapping(value="/actualizar/{id}", method = RequestMethod.GET)

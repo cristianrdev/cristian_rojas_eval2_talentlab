@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.tiendavirtual.data.models.Producto;
 import com.tiendavirtual.data.models.Usuario;
@@ -34,10 +35,14 @@ public class VentaController {
 	private UsuarioService usuarioservice;
 	
 	@RequestMapping("")
-	public String indexUsuario(@ModelAttribute("venta") Venta venta,Model model ) {
+	public String indexUsuario(@ModelAttribute("venta") Venta venta,Model model) {
 		List<Venta> lista_ventas = vservice.findAll();
 		List<Producto> lista_productos =productoservice.findAll();
-		List<Usuario> lista_usuarios =usuarioservice.findAll();
+		List<Usuario> lista_usuarios = usuarioservice.findAll();
+
+		
+		//System.out.println("==>>>>" + redirectAttrs.getAttribute("nuevo_usuario"));
+		
 		
 		model.addAttribute("lista_productos", lista_productos);
 		model.addAttribute("lista_ventas", lista_ventas);
