@@ -14,7 +14,18 @@ public class IndexController {
 	
 	@RequestMapping("")
 	public String indexUsuario() {
-				return "index.jsp";
+		return "index.jsp";
 	}
+	
+	@RequestMapping("/login")
+	public String loginUsuario() {
+		return "login.jsp";
+	}
+	
+	@RequestMapping("/registrar")
+	public String registrarUsuario() {
+		return "registrar.jsp";
+	}
+	
 
 }
